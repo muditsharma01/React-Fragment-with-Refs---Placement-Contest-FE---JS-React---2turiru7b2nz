@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import './App.css';
+
 
 import List from "./List";
 import ListItems from "./ListItems"; // Import ListItems component
