@@ -1,33 +1,31 @@
-import React, { useState, useEffect, Fragment, useRef } from "react";
-import '../styles/App.css';
+import React, { useState, useRef } from "react";
+import './App.css';
 
 import List from "./List";
+import ListItems from "./ListItems"; // Import ListItems component
 
 const App = () => {
-
   const [value, setValue] = useState('');
   const [list, setList] = useState([]);
   const inputRef = useRef();
 
   const onButtonClick = () => {
-    
-    setList([]);
-    for (let i = 1; i < Number(value) + 1; i++) {
-      setList((prev) => [...prev, i]);
+    if (value === '') {
+      inputRef.current.focus(); // Focus the input field if it's empty
+    } else {
+      setList(Array.from({ length: parseInt(value, 10) }, (_, i) => i + 1));
+      setValue('');
     }
-    setValue('')
   };
-
-
- 
 
   return (
     <div id="main">
-
       <input id="input" onChange={(e) => setValue(e.target.value)} value={value} ref={inputRef} />
       <button id="button" onClick={onButtonClick}>Click</button>
       <ul id="list">
-        <List listx={list} />
+        {list.map((i) => (
+          <ListItems key={i} valuex={i} />
+        ))}
       </ul>
     </div>
   );
